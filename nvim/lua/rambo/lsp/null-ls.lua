@@ -16,7 +16,9 @@ null_ls.setup({
 		formatting.prettier.with({ extra_args = { "--no-semi" } }),
 		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.rustfmt,
+		formatting.stylua,
 	},
+	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -25,8 +27,8 @@ null_ls.setup({
 				buffer = bufnr,
 				callback = function()
 					-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-				vim.lsp.buf.format({ bufnr = bufnr })
-        end
+					vim.lsp.buf.formatting_sync()
+				end,
 			})
 		end
 	end,
