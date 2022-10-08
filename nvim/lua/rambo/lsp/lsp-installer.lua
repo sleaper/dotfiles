@@ -42,7 +42,7 @@ for _, server in pairs(servers) do
 	end
 
 	if server == "tsserver" then
-		local tsserver_opts = require("rambo.lsp.settings.jsonls")
+		local tsserver_opts = require("rambo.lsp.settings.tsserver")
 		opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
 	end
 
