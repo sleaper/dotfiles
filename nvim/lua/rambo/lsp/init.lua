@@ -5,4 +5,4 @@ end
 
 require("rambo.lsp.lsp-installer")
 require("rambo.lsp.handlers").setup()
-require "rambo.lsp.null-ls"
+require("rambo.lsp.null-ls")

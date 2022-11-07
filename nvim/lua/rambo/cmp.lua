@@ -51,9 +51,9 @@ cmp.setup({
 			luasnip.lsp_expand(args.body) -- For `luasnip` users.
 		end,
 	},
-  completion = {
-    autocomplete = false
-  },
+	completion = {
+		autocomplete = false,
+	},
 	mapping = {
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
@@ -99,19 +99,19 @@ cmp.setup({
 	},
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      vim_item.kind = kind_icons[vim_item.kind]
-      vim_item.menu = ({
-        nvim_lsp = "",
-        nvim_lua = "",
-        luasnip = "",
-        buffer = "",
-        path = "",
-        emoji = "",
-      })
-      [entry.source.name]
-      return vim_item
-    end,	},
+		format = function(entry, vim_item)
+			vim_item.kind = kind_icons[vim_item.kind]
+			vim_item.menu = ({
+				nvim_lsp = "",
+				nvim_lua = "",
+				luasnip = "",
+				buffer = "",
+				path = "",
+				emoji = "",
+			})[entry.source.name]
+			return vim_item
+		end,
+	},
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lua" },
