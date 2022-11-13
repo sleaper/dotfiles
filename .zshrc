@@ -114,12 +114,12 @@ alias vim="nvim"
 #export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 #export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 #export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-#export ANDROID_HOME=~/Library/Android/sdk
 
 
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export ANDROID_HOME=~/Android/Sdk
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
