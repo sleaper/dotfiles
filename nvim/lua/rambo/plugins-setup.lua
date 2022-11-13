@@ -88,6 +88,12 @@ return packer.startup(function(use)
     end,
   })
 
+  -- Bufferline
+  use("akinsho/bufferline.nvim")
+
+  -- Impatient for faster startup
+  use("lewis6991/impatient.nvim")
+
   -- auto closing
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
   use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags

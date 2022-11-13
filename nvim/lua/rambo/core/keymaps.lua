@@ -7,6 +7,13 @@ local keymap = vim.keymap -- for conciseness
 -- General Keymaps
 ---------------------
 
+
+-- Custom
+keymap.set("n", "<leader>pv", ":Ex<CR>")
+keymap.set("i", "<C-S>", "<ESC>:w<CR>")
+keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
+keymap.set("n", "<C-w>", ":bd #<CR>")
+
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>")
 
@@ -24,6 +31,10 @@ keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
+-- Navigate buffers
+keymap.set("n", "<S-l>", ":bnext<CR>")
+keymap.set("n", "<S-h>", ":bprevious<CR>")
+
 ----------------------
 -- Plugin Keybinds
 ----------------------
@@ -35,7 +46,7 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window max
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 
 -- telescope
-keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
+keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
 keymap.set("n", "<c-t>", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
