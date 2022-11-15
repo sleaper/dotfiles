@@ -7,12 +7,11 @@ local keymap = vim.keymap -- for conciseness
 -- General Keymaps
 ---------------------
 
-
 -- Custom
 keymap.set("n", "<leader>pv", ":Ex<CR>")
 keymap.set("i", "<C-S>", "<ESC>:w<CR>")
 keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-keymap.set("n", "<C-w>", ":bd #<CR>")
+keymap.set("n", "<C-w>", ":bdelete! <CR>")
 
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>")
