@@ -14,6 +14,7 @@ end
 telescope.setup({
 	-- configure custom mappings
 	defaults = {
+		file_ignore_patterns = { "node_modules" },
 		mappings = {
 			i = {
 				["<C-n>"] = actions.cycle_history_next,
