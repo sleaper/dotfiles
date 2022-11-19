@@ -87,6 +87,8 @@ return packer.startup(function(use)
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
 	})
+	-- rainbow brackets
+	use("p00f/nvim-ts-rainbow")
 
 	-- Bufferline
 	use("akinsho/bufferline.nvim")
@@ -100,6 +102,7 @@ return packer.startup(function(use)
 
 	-- git integration
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 
 	if packer_bootstrap then
 		require("packer").sync()
