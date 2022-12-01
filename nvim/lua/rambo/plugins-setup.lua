@@ -105,6 +105,16 @@ return packer.startup(function(use)
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 
+	use("famiu/bufdelete.nvim")
+
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("todo-comments").setup({})
+		end,
+	})
+
 	if packer_bootstrap then
 		require("packer").sync()
 	end
