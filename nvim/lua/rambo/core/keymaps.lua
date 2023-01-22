@@ -3,10 +3,15 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap -- for conciseness
 
+-- import telescope actions safely
+local status, builtin = pcall(require, "telescope.builtin")
+if not status then
+	return
+end
+
 ---------------------
 -- General Keymaps
 ---------------------
-
 -- Custom
 keymap.set("n", "<leader>pv", ":Ex<CR>")
 keymap.set("i", "<C-S>", "<ESC>:w<CR>")
@@ -18,13 +23,13 @@ keymap.set("n", "<leader>ng", ":Neogit <CR>")
 keymap.set("i", "jk", "<ESC>")
 
 -- clear search highlights
-keymap.set("n", "<leader>nh", ":nohl<CR>")
+keymap.set("n", "<leader>nh", ":nohl<CR>", { silent = true })
 
 -- window management
-keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width & height
-keymap.set("n", "<leader>sx", ":close<CR>") -- close current split window
+keymap.set("n", "<leader>sv", "<C-w>v", { silent = true }) -- split window vertically
+keymap.set("n", "<leader>sh", "<C-w>s", { silent = true }) -- split window horizontally
+keymap.set("n", "<leader>se", "<C-w>=", { silent = true }) -- make split windows equal width & height
+keymap.set("n", "<leader>sx", ":close<CR>", { silent = true }) -- close current split window
 
 keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
@@ -32,8 +37,8 @@ keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
 -- Navigate buffers
-keymap.set("n", "<S-l>", ":bnext<CR>")
-keymap.set("n", "<S-h>", ":bprevious<CR>")
+keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
+keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 
 ----------------------
 -- Plugin Keybinds
@@ -46,11 +51,9 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window max
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 
 -- telescope
-keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
-keymap.set("n", "<c-t>", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
-keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
-keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
-keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
+keymap.set("n", "<c-p>", builtin.find_files, { desc = "[S]earch [F]iles" }) -- find files within current working directory, respects .gitignore
+keymap.set("n", "<c-t>", builtin.live_grep, { desc = "[S]eacrch by [G]rep" }) -- find string in current working directory as you type
+keymap.set("n", "<c-f>", builtin.grep_string, { desc = "[S]earch current [W]ord" }) -- find string under cursor in current working directory
 
 -- telescope git commands (not on youtube nvim video)
 keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]

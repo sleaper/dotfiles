@@ -22,6 +22,7 @@ null_ls.setup({
 		formatting.stylua, -- lua formatter
 		formatting.rustfmt,
 		null_ls.builtins.code_actions.eslint,
+		diagnostics.flake8,
 	},
 	-- configure format on save
 	on_attach = function(client, bufnr)
