@@ -6,7 +6,7 @@ local keymap = vim.keymap -- for conciseness
 -- import telescope actions safely
 local status, builtin = pcall(require, "telescope.builtin")
 if not status then
-	return
+  return
 end
 
 ---------------------
