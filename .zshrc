@@ -130,3 +130,4 @@ export PATH="$PNPM_HOME:$PATH"
 export PATH="/home/rambo/.deno/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH=$PATH:$HOME/.maestro/bin
