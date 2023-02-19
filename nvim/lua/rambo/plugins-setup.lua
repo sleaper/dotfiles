@@ -109,6 +109,7 @@ return packer.startup(function(use)
 
   -- git integration
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+  use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 
   use("famiu/bufdelete.nvim")
@@ -127,8 +128,6 @@ return packer.startup(function(use)
       require("project_nvim").setup({})
     end,
   })
-
-  use({ "RRethy/vim-illuminate" })
 
   use({ "stevearc/dressing.nvim" })
   use({ "echasnovski/mini.nvim", branch = "stable" })

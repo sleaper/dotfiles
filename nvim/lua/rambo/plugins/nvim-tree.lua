@@ -16,8 +16,6 @@ nvim_tree.setup({
 		ignore = false,
 		timeout = 500,
 	},
-	dotfiles = false,
-	custom = { "^.git$" },
 	sync_root_with_cwd = true,
 	respect_buf_cwd = true,
 	update_focused_file = {

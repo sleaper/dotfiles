@@ -1,5 +1,8 @@
 local opt = vim.opt -- for conciseness
 
+-- vim.g.VM_maps["Find Under"] = "<C-d>"
+ -- vim.g.VM_maps["Find Subword Under"] = "<C-d>"
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
