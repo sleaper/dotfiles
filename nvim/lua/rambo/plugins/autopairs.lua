@@ -6,11 +6,11 @@ end
 
 -- configure autopairs
 autopairs.setup({
-  check_ts = true, -- enable treesitter
+  check_ts = true,                                          -- enable treesitter
   ts_config = {
-    lua = { "string", "source" }, -- don't add pairs in lua string treesitter nodes
-    javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
-    java = false, -- don't check treesitter on java
+    lua = { "string", "source" },                           -- don't add pairs in lua string treesitter nodes
+    javascript = { "template_string" },                     -- don't add pairs in javscript template_string treesitter nodes
+    java = false,                                           -- don't check treesitter on java
   },
   disable_filetype = { "TelescopePrompt", "spectre_panel" }, -- don't check treesitter on these filetypes
 })
