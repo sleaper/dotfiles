@@ -13,7 +13,7 @@ local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
 -- autocommand that reloads neovim and installs/updates/removes plugins
 -- when file is saved
-vim.cmd([[ 
+vim.cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
@@ -44,7 +44,13 @@ return packer.startup(function(use)
   use("JoosepAlviste/nvim-ts-context-commentstring")
 
   -- file explorer
-  use("nvim-tree/nvim-tree.lua")
+use {
+  'nvim-tree/nvim-tree.lua',
+  requires = {
+    'nvim-tree/nvim-web-devicons', -- optional, for file icons
+  },
+  tag = 'nightly' -- optional, updated every week. (see issue #1193)
+}
 
   -- vs-code like icons
   use("kyazdani42/nvim-web-devicons")
@@ -53,7 +59,7 @@ return packer.startup(function(use)
   use("nvim-lualine/lualine.nvim")
 
   -- fuzzy finding w/ telescope
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = ' arch -arm64 make' }
   use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
 
   -- autocompletion
