@@ -40,6 +40,19 @@ return packer.startup(function(use)
   use("folke/tokyonight.nvim")
 
   use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
+  -- Lua
+  use({
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      })
+    end,
+  })
 
   -- commenting with gc
   use("numToStr/Comment.nvim")
@@ -51,7 +64,6 @@ return packer.startup(function(use)
     requires = {
       "nvim-tree/nvim-web-devicons", -- optional, for file icons
     },
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
   })
 
   -- vs-code like icons
@@ -61,22 +73,26 @@ return packer.startup(function(use)
   use("nvim-lualine/lualine.nvim")
 
   -- fuzzy finding w/ telescope
+  use({
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.1",
+    requires = { { "nvim-lua/plenary.nvim" } },
+  })
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = " arch -arm64 make" })
-  use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
 
   -- autocompletion
-  use("hrsh7th/nvim-cmp") -- completion plugin
+  use("hrsh7th/nvim-cmp")  -- completion plugin
   use("hrsh7th/cmp-buffer") -- source for text in buffer
-  use("hrsh7th/cmp-path") -- source for file system paths
+  use("hrsh7th/cmp-path")  -- source for file system paths
   use({ "github/copilot.vim" })
 
   -- snippets
-  use("L3MON4D3/LuaSnip") -- snippet engine
-  use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+  use("L3MON4D3/LuaSnip")            -- snippet engine
+  use("saadparwaiz1/cmp_luasnip")    -- for autocompletion
   use("rafamadriz/friendly-snippets") -- useful snippets
 
   -- managing & installing lsp servers, linters & formatters
-  use("williamboman/mason.nvim") -- in charge of managing lsp servers, linters & formatters
+  use("williamboman/mason.nvim")          -- in charge of managing lsp servers, linters & formatters
   use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
 
   -- configuring lsp servers
@@ -90,17 +106,17 @@ return packer.startup(function(use)
     end,
   })
   use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
-  use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+  use("onsails/lspkind.nvim")              -- vs-code like icons for autocompletion
 
   -- formatting & linting
   use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
-  use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+  use("jayp0521/mason-null-ls.nvim")    -- bridges gap b/w mason & null-ls
 
   -- treesitter configuration
   use({
     "nvim-treesitter/nvim-treesitter",
     run = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
+      require("nvim-treesitter.install").compilers({ "clang" })
     end,
   })
   -- rainbow brackets
@@ -113,7 +129,7 @@ return packer.startup(function(use)
   use("lewis6991/impatient.nvim")
 
   -- auto closing
-  use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
+  use("windwp/nvim-autopairs")                                -- autoclose parens, brackets, quotes, etc...
   use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
   -- git integration
