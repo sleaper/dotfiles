@@ -1,7 +1,6 @@
 local opt = vim.opt -- for conciseness
 
--- vim.g.VM_maps["Find Under"] = "<C-d>"
--- vim.g.VM_maps["Find Subword Under"] = "<C-d>"
+-- vim.g.VM_maps["Find Under"] = "<C-d>" vim.g.VM_maps["Find Subword Under"] = "<C-d>"
 
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
@@ -41,3 +40,9 @@ opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 opt.splitright = true     -- split vertical window to the right
 opt.splitbelow = true     -- split horizontal window to the bottom
 opt.iskeyword:append("-") -- consider string-string as whole word
+
+local function open_nvim_tree()
+  -- open the tree
+  require("nvim-tree.api").tree.open()
+end
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })

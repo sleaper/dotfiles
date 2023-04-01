@@ -33,18 +33,38 @@ return packer.startup(function(use)
 
   use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
+  use("wakatime/vim-wakatime")
+
   -- Colorschemes
   use("navarasu/onedark.nvim")
   use("folke/tokyonight.nvim")
 
   use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
+  -- Lua
+  use({
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      })
+    end,
+  })
 
   -- commenting with gc
   use("numToStr/Comment.nvim")
   use("JoosepAlviste/nvim-ts-context-commentstring")
 
   -- file explorer
-  use("nvim-tree/nvim-tree.lua")
+  use({
+    "nvim-tree/nvim-tree.lua",
+    requires = {
+      "nvim-tree/nvim-web-devicons", -- optional, for file icons
+    },
+  })
 
   -- vs-code like icons
   use("kyazdani42/nvim-web-devicons")
@@ -53,8 +73,12 @@ return packer.startup(function(use)
   use("nvim-lualine/lualine.nvim")
 
   -- fuzzy finding w/ telescope
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
-  use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" })       -- fuzzy finder
+  use({
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.1",
+    requires = { { "nvim-lua/plenary.nvim" } },
+  })
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = " arch -arm64 make" })
 
   -- autocompletion
   use("hrsh7th/nvim-cmp")  -- completion plugin
@@ -92,7 +116,7 @@ return packer.startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
+      require("nvim-treesitter.install").compilers({ "clang" })
     end,
   })
   -- rainbow brackets
