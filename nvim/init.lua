@@ -1,16 +1,4 @@
-require("rambo.plugins-setup")
-require("rambo.plugins.impatient")
-require("rambo.core.options")
-require("rambo.core.keymaps")
-require("rambo.core.colorscheme")
-require("rambo.plugins.comment")
-require("rambo.plugins.bufferline")
-require("rambo.plugins.nvim-tree")
-require("rambo.plugins.lualine")
-require("rambo.plugins.telescope")
-require("rambo.plugins.nvim-cmp")
-require("rambo.plugins.autopairs")
-require("rambo.plugins.treesitter")
-require("rambo.plugins.gitsigns")
-require("rambo.plugins.lsp")
-require("rambo.plugins.neogit")
+require "options"
+require "keymaps"
+require "Lazy"
+require "autocommands"
