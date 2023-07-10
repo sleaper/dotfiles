@@ -3,6 +3,8 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
+local builtin = require "telescope.builtin"
+
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -61,8 +63,8 @@ keymap("v", ">", ">gv", opts)
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
-keymap("n", "<c-p>", ":Telescope find_files<CR>", opts)
-keymap("n", "<c-t>", ":Telescope live_grep<CR>", opts)
+keymap("n", "<c-p>", builtin.find_files, opts)
+keymap("n", "<c-t>", builtin.live_grep, opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>gb", ":Telescope git_branches<CR>", opts)

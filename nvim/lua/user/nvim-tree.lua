@@ -1,7 +1,10 @@
 local M = {
-  "kyazdani42/nvim-tree.lua",
-  commit = "f5d970d4506f385b29534252d8c15a782fa53034",
-  event = "VimEnter",
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  lazy = false,
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
 }
 
 local function on_attach(bufnr)
@@ -117,7 +120,7 @@ function M.config()
       enable = true,
       show_on_dirs = true,
       icons = {
-        hint = "󰌵",
+        hint = "",
         info = "",
         warning = "",
         error = "",
