@@ -85,6 +85,13 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-buffer") -- source for text in buffer
   use("hrsh7th/cmp-path")  -- source for file system paths
   use({ "github/copilot.vim" })
+  use({
+    "akinsho/git-conflict.nvim",
+    tag = "*",
+    config = function()
+      require("git-conflict").setup()
+    end,
+  })
 
   -- snippets
   use("L3MON4D3/LuaSnip")            -- snippet engine
@@ -138,6 +145,8 @@ return packer.startup(function(use)
   use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 
   use("famiu/bufdelete.nvim")
+
+  use("ThePrimeagen/vim-be-good")
 
   use({
     "folke/todo-comments.nvim",
