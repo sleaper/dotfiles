@@ -7,9 +7,6 @@ local M = {
 
 M.name = "onedark"
 function M.config()
-  require("onedark").setup {
-    transparent = true,
-  }
   local status_ok, _ = pcall(vim.cmd.colorscheme, M.name)
   if not status_ok then
     return

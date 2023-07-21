@@ -7,7 +7,7 @@ local M = {
 }
 
 function M.config()
-  local refactoring = require "refactoring"
+  local refactoring = require("telescope").load_extension "refactoring"
 
   vim.api.nvim_set_keymap(
     "v",
@@ -20,7 +20,7 @@ function M.config()
     prompt_func_return_type = {
       go = true,
       cpp = true,
-      c = true,
+      c = false,
       java = true,
 
       h = false,
