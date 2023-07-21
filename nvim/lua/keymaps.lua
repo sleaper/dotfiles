@@ -27,7 +27,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<leader>pv", ":Ex<CR>")
 keymap("i", "<C-S>", "<ESC>:w<CR>")
 keymap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-keymap("n", "<C-w>", ":Bdelete <CR>")
+-- keymap("n", "<C-w>", ":Bdelete <CR>")
 keymap("n", "<leader>ng", ":Git<CR>")
 
 -- use jk to exit insert mode
