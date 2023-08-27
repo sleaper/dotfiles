@@ -33,9 +33,9 @@ keymap("n", "<leader>ng", ":Git<CR>")
 -- use jk to exit insert mode
 keymap("i", "jk", "<ESC>")
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+-- Navigate buffers // USE harpoon insted
+-- keymap("n", "<S-l>", ":bnext<CR>", opts)
+-- keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Clear highlights
 keymap("n", "<leader>nh", "<cmd>nohlsearch<CR>", opts)
