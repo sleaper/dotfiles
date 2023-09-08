@@ -59,6 +59,9 @@ keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
   { silent = true, noremap = true }
 )
+keymap("n", "<leader>to", "<cmd>TodoTelescope<cr>",
+  { silent = true, noremap = true }
+)
 
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)

@@ -137,7 +137,9 @@ require('lazy').setup({
       end,
     },
   },
-
+  {
+    'sindrets/diffview.nvim'
+  },
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -146,7 +148,6 @@ require('lazy').setup({
       vim.cmd.colorscheme 'onedark'
     end,
   },
-
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -173,7 +174,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {},        lazy = false },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -196,9 +197,18 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'JoosepAlviste/nvim-ts-context-commentstring',
     },
     build = ':TSUpdate',
   },
+  {
+    "windwp/nvim-ts-autotag"
+  },
+
+  -- TODO: does not work
+  -- { "nvim-treesitter/nvim-treesitter-context" },
+
+  -- TODO: Maybe add? https://github.com/iamcco/markdown-preview.nvim
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -252,7 +262,7 @@ vim.keymap.set("n", "<Leader>sR", "<CMD>lua require('telescope').extensions.git_
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'tsx', 'typescript', 'tsx', 'graphql' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -267,6 +277,12 @@ require('nvim-treesitter.configs').setup {
       scope_incremental = '<c-s>',
       node_decremental = '<M-space>',
     },
+  },
+  autotag = {
+    enable = true
+  },
+  context_commentstring = {
+    enable = true
   },
   textobjects = {
     select = {
@@ -306,10 +322,9 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- Diagnostic keymaps
--- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
--- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
--- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set("n", "<leader>q", function() require("trouble").open("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>td", function() require("trouble").open("document_diagnostics") end)
+vim.keymap.set("n", "<leader>tq", function() require("trouble").open("quickfix") end)
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
