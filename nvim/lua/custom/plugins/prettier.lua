@@ -1,5 +1,6 @@
 return {
 	"MunifTanjim/prettier.nvim",
+	lazy = true,
 	config = function()
 		local status, prettier = pcall(require, "prettier")
 		if (not status) then return end
