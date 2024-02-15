@@ -57,18 +57,19 @@ keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opts)
 -- see init.lua
 
 keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
-  { silent = true, noremap = true }
+	{ silent = true, noremap = true }
 )
 keymap("n", "<leader>to", "<cmd>TodoTelescope<cr>",
-  { silent = true, noremap = true }
+	{ silent = true, noremap = true }
 )
+
+
+-- Persistence
+keymap("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {})
 
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
--- Comment
--- keymap("n", "gcc", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
--- keymap("x", "gcc", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 
 -- -- DAP
 -- keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)

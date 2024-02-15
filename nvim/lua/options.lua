@@ -4,8 +4,10 @@ vim.g.maplocalleader = ' '
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.opt.shiftwidth = 2   -- the number of spaces inserted for each indentation
-vim.opt.tabstop = 2      -- insert 2 spaces for a tab
+-- vim.g.c_syntax_for_h = 1
+
+vim.opt.shiftwidth = 4   -- the number of spaces inserted for each indentation
+vim.opt.tabstop = 4      -- insert 2 spaces for a tab
 vim.opt.swapfile = false -- creates a swapfile
 -- [[ Setting options ]]
 -- See `:help vim.o`
