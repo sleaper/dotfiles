@@ -4,7 +4,6 @@ local keymap = vim.keymap.set
 local opts = { silent = true }
 
 -- local builtin = require "telescope.builtin"
-
 -- --Remap space as leader key
 -- keymap("", "<Space>", "<Nop>", opts)
 
@@ -16,71 +15,64 @@ local opts = { silent = true }
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
-
 -- Custom
-keymap("n", "<leader>pv", ":Ex<CR>")
+keymap("n", "<leader>pv", ":qa<CR>")
 keymap("i", "<C-S>", "<ESC>:w<CR>")
-keymap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
 -- keymap("n", "<C-w>", ":Bdelete <CR>")
 keymap("n", "<leader>ng", ":Git<CR>")
 
 -- use jk to exit insert mode
 keymap("i", "jk", "<ESC>")
 
--- Navigate buffers // USE harpoon insted
--- keymap("n", "<S-l>", ":bnext<CR>", opts)
--- keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
 -- Clear highlights
 keymap("n", "<leader>nh", "<cmd>nohlsearch<CR>", opts)
-
--- Close buffers
-keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
 
--- Plugins --
----------------
 --
 -- NvimTree
 keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opts)
 
+keymap("n", "<leader>m", "<cmd>make<CR>", opts)
+
 -- Telescope
 -- see init.lua
+keymap("n", "<leader>to", "<cmd>TodoTelescope<cr>", { silent = true, noremap = true })
 
-keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
-	{ silent = true, noremap = true }
-)
-keymap("n", "<leader>to", "<cmd>TodoTelescope<cr>",
-	{ silent = true, noremap = true }
-)
+-- Zenmode
+keymap("n", "<leader>zz", function()
+	require("zen-mode").toggle()
+	vim.wo.wrap = false
+	vim.wo.number = true
+	vim.wo.rnu = true
+end, { silent = true, noremap = true })
 
+-- TIP: Disable arrow keys in normal mode
+vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
--- Persistence
-keymap("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {})
+-- Keybinds to make split navigation easier.
+--  Use CTRL+<hjkl> to switch between windows
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- Git
--- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
-
-
--- -- DAP
--- keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
--- keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
--- keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
--- keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
--- keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
--- keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
--- keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
--- keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
--- keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
-
--- -- Lsp
--- keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
+-- [[ Basic Autocommands ]]
+--  See `:help lua-guide-autocommands`
+--
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
