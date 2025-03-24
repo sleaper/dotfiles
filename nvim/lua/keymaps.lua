@@ -21,8 +21,29 @@ keymap("i", "<C-S>", "<ESC>:w<CR>")
 -- keymap("n", "<C-w>", ":Bdelete <CR>")
 keymap("n", "<leader>ng", ":Git<CR>")
 
+-- GIT WORKTREES
+-- Set up the keybind for Ctrl+w in normal mode
+keymap("n", "<leader>sg", "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>", opts)
+-- Set up the keybind for creating a new Git worktree
+keymap("n", "<leader>gw", "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>", opts)
+
+keymap("n", "<leader>gs", function()
+	local path = vim.fn.input("Enter worktree path to switch to: ")
+	if path == "" then
+		return
+	end -- Cancel if no input
+	require("git-worktree").switch_worktree(path)
+end, opts)
+
+keymap("n", "<leader>gd", function()
+	local path = vim.fn.input("Enter worktree path to delete: ")
+	if path == "" then
+		return
+	end -- Cancel if no input
+	require("git-worktree").delete_worktree(path)
+end, opts)
+
 -- use jk to exit insert mode
-keymap("i", "jk", "<ESC>")
 
 -- Clear highlights
 keymap("n", "<leader>nh", "<cmd>nohlsearch<CR>", opts)
@@ -49,6 +70,8 @@ keymap("n", "<leader>zz", function()
 	vim.wo.rnu = true
 end, { silent = true, noremap = true })
 
+keymap("n", "<space>q", vim.diagnostic.open_float, { noremap = true, silent = true })
+
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
@@ -74,5 +97,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
+	end,
+})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "solarized",
+	callback = function()
+		vim.api.nvim_set_hl(0, "CopilotSuggestion", {
+			fg = "#555555",
+			ctermfg = 8,
+			force = true,
+		})
 	end,
 })

@@ -47,28 +47,28 @@ require("lazy").setup({
 		},
 	},
 
-	{ -- Useful plugin to show you pending keybinds.
-		"folke/which-key.nvim",
-		event = "VimEnter", -- Sets the loading event to 'VimEnter'
-		config = function() -- This is the function that runs, AFTER loading
-			require("which-key").setup()
-
-			-- Document existing key chains
-			require("which-key").register({
-				["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-				["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-				["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-				["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-				["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-				["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-				["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
-			})
-			-- visual mode
-			require("which-key").register({
-				["<leader>h"] = { "Git [H]unk" },
-			}, { mode = "v" })
-		end,
-	},
+	-- { -- Useful plugin to show you pending keybinds.
+	-- 	"folke/which-key.nvim",
+	-- 	event = "VimEnter", -- Sets the loading event to 'VimEnter'
+	-- 	config = function() -- This is the function that runs, AFTER loading
+	-- 		require("which-key").setup()
+	--
+	-- 		-- Document existing key chains
+	-- 		require("which-key").register({
+	-- 			["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
+	-- 			["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
+	-- 			["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
+	-- 			["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
+	-- 			["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+	-- 			["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
+	-- 			["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
+	-- 		})
+	-- 		-- visual mode
+	-- 		require("which-key").register({
+	-- 			["<leader>h"] = { "Git [H]unk" },
+	-- 		}, { mode = "v" })
+	-- 	end,
+	-- },
 
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
@@ -117,6 +117,7 @@ require("lazy").setup({
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "git_worktree")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
@@ -325,7 +326,7 @@ require("lazy").setup({
 				-- Disable "format_on_save lsp_fallback" for languages that don't
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
+				local disable_filetypes = { c = false, cpp = false }
 				return {
 					timeout_ms = 500,
 					lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -361,13 +362,14 @@ require("lazy").setup({
 				end)(),
 			},
 			"saadparwaiz1/cmp_luasnip",
-
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+
 			luasnip.config.setup({})
 
 			cmp.setup({
@@ -422,6 +424,7 @@ require("lazy").setup({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
+					{ name = "nvim_lsp_signature_help" },
 				},
 			})
 		end,
@@ -460,7 +463,7 @@ require("lazy").setup({
 		"folke/zen-mode.nvim",
 		opts = {
 			window = {
-				width = 90, -- width of the Zen window
+				width = 120, -- width of the Zen window
 				options = {},
 			},
 			plugins = {

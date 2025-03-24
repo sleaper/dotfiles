@@ -5,7 +5,7 @@ vim.opt.relativenumber = true
 -- vim.g.loaded_netrwPlugin = 1
 
 vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
-vim.opt.tabstop = 4 -- insert 2 spaces for a tab
+vim.opt.tabstop = 4 -- insert 4 spaces for a tab
 vim.opt.swapfile = false -- creates a swapfile
 
 -- Enable mouse mode, can be useful for resizing splits for example!
@@ -54,7 +54,7 @@ vim.opt.scrolloff = 10
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.g.c_syntax_for_h = 1
+vim.g.c_syntax_for_h = 0
 
 vim.opt.hlsearch = true
 

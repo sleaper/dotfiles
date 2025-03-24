@@ -1,25 +1,21 @@
 #!/usr/bin/env bash
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
-else
-    selected=$(find ~/Documents/code ~/Documents/code/1-2-LS/IJC ~/Documents ~/dotfiles ~/Documents/code/1-2-LS -mindepth 1 -maxdepth 1 -type d | fzf)
+# Use the first argument if provided; otherwise, select a directory using fzf.
+selected="${1:-$(find ~/Documents/code ~/Documents/code/1-2-LS/IJC ~/Documents ~/dotfiles ~/Documents/code/2-2-LS/ ~/Documents/code/2-1-LS -mindepth 1 -maxdepth 1 -type d | fzf)}"
+
+# Exit if nothing was selected.
+[[ -z "$selected" ]] && exit 0
+
+# Create a session name from the basename (replace dots with underscores).
+session_name=$(basename "$selected" | tr . _)
+
+# If not inside tmux and no tmux server is running, create and attach a new session.
+if [[ -z "${TMUX-}" ]] && ! tmux info &>/dev/null; then
+    exec tmux new-session -s "$session_name" -c "$selected"
 fi
 
-if [[ -z $selected ]]; then
-    exit 0
-fi
+# If the session doesn't exist, create it in the background (ignore error if it exists).
+tmux new-session -ds "$session_name" -c "$selected" 2>/dev/null || true
 
-selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
-
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
-    exit 0
-fi
-
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
-fi
-
-tmux switch-client -t $selected_name
+# Switch to the selected session.
+tmux switch-client -t "$session_name"
