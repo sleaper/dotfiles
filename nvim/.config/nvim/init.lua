@@ -124,7 +124,6 @@ vim.diagnostic.config {
       return diagnostic_message[diagnostic.severity]
     end,
   },
-  virtual_lines = false,
   jump = { float = true },
 }
 
