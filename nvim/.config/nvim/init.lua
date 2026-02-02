@@ -275,13 +275,13 @@ require('lazy').setup({
           local buf = event.buf
 
           -- Find references for the word under your cursor.
-          vim.keymap.set('n', 'grr', builtin.lsp_references, { buffer = buf, desc = '[G]oto [R]eferences' })
+          vim.keymap.set('n', 'gr', builtin.lsp_references, { buffer = buf, desc = '[G]oto [R]eferences' })
 
           -- Jump to the implementation of the word under your cursor.
-          vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
+          vim.keymap.set('n', 'gi', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
 
           -- Jump to the definition of the word under your cursor.
-          vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
+          vim.keymap.set('n', 'gd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
 
           -- Fuzzy find all the symbols in your current document.
           vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { buffer = buf, desc = 'Open Document Symbols' })
@@ -291,7 +291,7 @@ require('lazy').setup({
             { buffer = buf, desc = 'Open Workspace Symbols' })
 
           -- Jump to the type of the word under your cursor.
-          vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+          vim.keymap.set('n', 'gt', builtin.lsp_type_definitions, { buffer = buf, desc = '[G]oto [T]ype Definition' })
         end,
       })
 
@@ -655,7 +655,8 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     config = function()
-      local filetypes = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim',
+      local filetypes = { 'bash', 'c', 'diff', 'html', 'python', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query',
+        'vim',
         'vimdoc' }
       require('nvim-treesitter.configs').setup {
         ensure_installed = filetypes,
