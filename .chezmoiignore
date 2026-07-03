@@ -1,0 +1,5 @@
+.config/hypr/shaders
+
+{{- if eq .chezmoi.os "darwin" }}
+.config/hypr
+{{- end }}
