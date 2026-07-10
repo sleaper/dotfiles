@@ -1,6 +1,11 @@
 unbind C-b
+{{- if eq .chezmoi.os "darwin" }}
+set -g prefix §
+bind-key § last-window
+{{- else }}
 set -g prefix `
 bind-key ` last-window
+{{- end }}
 bind-key e send-prefix
 
 set -g status-position bottom
