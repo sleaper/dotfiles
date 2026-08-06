@@ -1,4 +1,5 @@
 unbind C-b
+
 {{- if eq .chezmoi.os "darwin" }}
 set -g prefix §
 bind-key § last-window
@@ -6,7 +7,10 @@ bind-key § last-window
 set -g prefix `
 bind-key ` last-window
 {{- end }}
+
 bind-key e send-prefix
+set -g mouse on
+set -g extended-keys on
 
 set -g status-position bottom
 set -g status-bg colour234
