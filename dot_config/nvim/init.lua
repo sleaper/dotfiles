@@ -167,6 +167,7 @@ require("guess-indent").setup({})
 
 -- vim-fugitive
 vim.pack.add({ "https://github.com/tpope/vim-fugitive" })
+vim.keymap.set("n", "<leader>gs", "<cmd>Git<CR>", { desc = "Git [S]tatus" })
 
 -- gitsigns
 vim.pack.add({ gh("lewis6991/gitsigns.nvim") })
@@ -190,6 +191,7 @@ require("which-key").setup({
 	spec = {
 		{ "<leader>s", group = "[S]earch", mode = { "n", "v" } },
 		{ "<leader>t", group = "[T]oggle" },
+		{ "<leader>g", group = "[G]it" },
 		{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
 		{ "gr", group = "LSP Actions", mode = { "n" } },
 	},
@@ -233,9 +235,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
 		local buf = event.buf
 
-		vim.keymap.set("n", "grr", builtin.lsp_references, { buffer = buf, desc = "[G]oto [R]eferences" })
-		vim.keymap.set("n", "gri", builtin.lsp_implementations, { buffer = buf, desc = "[G]oto [I]mplementation" })
-		vim.keymap.set("n", "grd", builtin.lsp_definitions, { buffer = buf, desc = "[G]oto [D]efinition" })
+		vim.keymap.set("n", "gr", builtin.lsp_references, { buffer = buf, desc = "[G]oto [R]eferences" })
+		vim.keymap.set("n", "gi", builtin.lsp_implementations, { buffer = buf, desc = "[G]oto [I]mplementation" })
+		vim.keymap.set("n", "gd", builtin.lsp_definitions, { buffer = buf, desc = "[G]oto [D]efinition" })
 		vim.keymap.set("n", "gO", builtin.lsp_document_symbols, { buffer = buf, desc = "Open Document Symbols" })
 		vim.keymap.set(
 			"n",
@@ -285,7 +287,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		map("K", vim.lsp.buf.hover, "Hover Documentation")
 
-		map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client:supports_method("textDocument/documentHighlight", event.buf) then
